@@ -21,6 +21,9 @@ public class Header {
     private WebElement newPostLink;
     @FindBy(id = "search-bar")
     private WebElement searchBar;
+    @FindBy (id = "homeIcon")
+    private WebElement isHomeLogoIsDisplayed;
+
 
 
     public Header(WebDriver driver) {
@@ -51,5 +54,9 @@ public class Header {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement newPostLink = wait.until(ExpectedConditions.elementToBeClickable(By.id("nav-link-new-post")));
         newPostLink.click();
+    }
+
+    public boolean isHomeLogoIsDisplayed () {
+        return isHomeLogoIsDisplayed.isDisplayed();
     }
 }

@@ -1,10 +1,10 @@
 package HomeWorkFinal;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import object.Header;
-import object.HomePage;
-import object.LoginPage;
-import object.ProfilePage;
+import factory.Header;
+import factory.HomePage;
+import factory.LoginPage;
+import factory.ProfilePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,9 +55,12 @@ public class ExerciseTests {
     @Test(invocationCount = 1)
     public void testSkilloLogoHomePageGestUser() {
 
-        driver.get("http://training.skillo-bg.com/posts/all");
-        WebElement homeLogo = driver.findElement(By.id("homeIcon"));
-       Assert.assertTrue(homeLogo.isDisplayed(), "Logo is not displayed!");
+        HomePage homePage = new HomePage(driver);
+        homePage.navigateTo();
+
+        Header header = new Header(driver);
+        header.isHomeLogoIsDisplayed();
+        Assert.assertTrue(header.isHomeLogoIsDisplayed(), (" The Logo is not displayed"));
     }
 
     @Test(invocationCount = 1)
@@ -69,9 +72,16 @@ public class ExerciseTests {
         Header header = new Header(driver);
         header.clickLogin();
 
-        driver.get("http://training.skillo-bg.com/users/login");
-        WebElement homeLogo = driver.findElement(By.id("homeIcon"));
-        Assert.assertTrue(homeLogo.isDisplayed(), ("Logo is not displayed"));
+        LoginPage loginPage = new LoginPage(driver);
+        Assert.assertTrue(loginPage.isUrlLoaded(),"Login URL is not correct");
+
+        String signInText = loginPage.getSignInElementText();
+        Assert.assertEquals(signInText,"Sign in");
+
+        Header header1 =  new Header(driver);
+        header.isHomeLogoIsDisplayed();
+
+        Assert.assertTrue(header1.isHomeLogoIsDisplayed(), (" The Logo is not displayed"));
 
 
     }
@@ -99,9 +109,9 @@ public class ExerciseTests {
 
         Assert.assertTrue(homePage.isUrlLoaded(), "Home URl is not correct");
 
-        driver.get("http://training.skillo-bg.com/posts/all");
-        WebElement homeLogo = driver.findElement(By.id("homeIcon"));
-        Assert.assertTrue(homeLogo.isDisplayed(), "Logo is not displayed!");
+        Header header1 = new Header(driver);
+        header1.isHomeLogoIsDisplayed();
+        Assert.assertTrue(header1.isHomeLogoIsDisplayed(), (" The Logo is not displayed"));
 
     }
 
@@ -128,18 +138,13 @@ public class ExerciseTests {
 
         header.clickProfile();
 
-//        wait.until(ExpectedConditions.urlToBe("http://training.skillo-bg.com/users/4694"));
-
-//        WebElement userNameElement = driver.findElement(By.tagName("h2"));
-//        String actualUserName = userNameElement.getText();
-//        String expectedUserName = "bk7777";
-//        Assert.assertEquals(actualUserName, expectedUserName, "User name is incorrect");
         ProfilePage profilePage = new ProfilePage(driver);
         Assert.assertTrue(profilePage.isUrlLoaded(),"Profile URL is not correct");
 
-        driver.get("http://training.skillo-bg.com:4300/users/4694");
-        WebElement homeLogo = driver.findElement(By.id("homeIcon"));
-        Assert.assertTrue(homeLogo.isDisplayed(), "Logo is not displayed!");
+        Header header1 = new Header(driver);
+        header1.isHomeLogoIsDisplayed();
+        Assert.assertTrue(header1.isHomeLogoIsDisplayed(), (" The Logo is not displayed"));
+
     }
 
     @Test(dataProvider = "getUsers")
@@ -165,9 +170,10 @@ public class ExerciseTests {
 
         header.clickNewPostLink();
 
-        driver.get("http://training.skillo-bg.com/posts/create");
-        WebElement homeLogo = driver.findElement(By.id("homeIcon"));
-        Assert.assertTrue(homeLogo.isDisplayed(), "Logo is not displayed!");
+        Header header1 = new Header(driver);
+        header1.isHomeLogoIsDisplayed();
+        Assert.assertTrue(header1.isHomeLogoIsDisplayed(), (" The Logo is not displayed"));
+
     }
 
     @Test(dataProvider = "getUsers")
@@ -192,9 +198,10 @@ public class ExerciseTests {
 
         header.searchBar();
 
-        driver.get("http://training.skillo-bg.com/posts/all");
-        WebElement homeLogo = driver.findElement(By.id("homeIcon"));
-        Assert.assertTrue(homeLogo.isDisplayed(), "Logo is not displayed!");
+        Header header1 = new Header(driver);
+        header1.isHomeLogoIsDisplayed();
+        Assert.assertTrue(header1.isHomeLogoIsDisplayed(), (" The Logo is not displayed"));
+
     }
 }
 

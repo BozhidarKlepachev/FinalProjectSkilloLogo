@@ -38,4 +38,9 @@ public class Header {
         searchFile.click();
     }
 
+
+    public boolean isHomeLogoIsDisplayed() {
+        WebElement isHomeLogoIsDisplayed = driver.findElement(By.id("homeIcon"));
+        return isHomeLogoIsDisplayed.isDisplayed();
+    }
 }
